@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ezhilan V · Portfolio | C Projects & Idioms</title>
+  <meta name="description" content="Ezhilan V — College student, programmer. Projects: Learn Idioms Daily (LID) and Hospital Patient Management System in C." />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== DESIGN SYSTEM : PRESERVED STYLE + ENHANCEMENTS ===== */
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.25rem;
+      --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem;
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #201f1d;
+      --color-surface-offset: #22211f;
+      --color-border: #393836;
+      --color-text: #f2f0ec;
+      --color-text-muted: #b2afa8;
+      --color-text-faint: #7b7872;
+      --color-primary: #4f98a3;
+      --color-primary-hover: #66acb6;
+      --color-primary-highlight: rgba(79,152,163,0.14);
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 10px 30px rgba(0,0,0,0.25);
+      --radius-sm: 0.375rem;
+      --radius-md: 0.75rem;
+      --radius-lg: 1rem;
+      --radius-xl: 1.5rem;
+      --font-body: 'Satoshi', system-ui, sans-serif;
+      --font-display: 'Cabinet Grotesk', 'Satoshi', system-ui, sans-serif;
+      --content-width: 1120px;
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right, rgba(79,152,163,0.18), transparent 26%),
+        radial-gradient(circle at bottom left, rgba(79,152,163,0.10), transparent 22%),
+        var(--color-bg);
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    button { font: inherit; }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+
+    .skip-link {
+      position: absolute; left: -999px; top: var(--space-4);
+      background: var(--color-primary); color: #091113; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md);
+    }
+    .skip-link:focus { left: var(--space-4); z-index: 100; }
+
+    .container { width: min(calc(100% - 2rem), var(--content-width)); margin: 0 auto; }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(23,22,20,0.78);
+      border-bottom: 1px solid rgba(242,240,236,0.08);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-4) 0;
+      gap: var(--space-4);
+    }
+    .brand { display: flex; align-items: center; gap: var(--space-3); font-weight: 700; letter-spacing: 0.02em; }
+    .brand-mark {
+      width: 2.5rem; height: 2.5rem; border-radius: 0.85rem;
+      background: linear-gradient(135deg, rgba(79,152,163,0.28), rgba(79,152,163,0.08));
+      border: 1px solid rgba(79,152,163,0.28);
+      display: grid; place-items: center; color: var(--color-text);
+      box-shadow: var(--shadow-sm);
+    }
+    .brand-mark svg { width: 1.3rem; height: 1.3rem; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: var(--space-4); color: var(--color-text-muted); font-size: var(--text-sm); }
+    .nav-links a:hover { color: var(--color-text); }
+
+    main { padding: var(--space-12) 0 var(--space-16); }
+    section { padding: var(--space-10) 0; }
+
+    .hero {
+      display: grid; grid-template-columns: 1.25fr 0.9fr; gap: var(--space-8); align-items: center;
+      min-height: calc(100vh - 100px);
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: 0.55rem 0.9rem; border-radius: 999px;
+      background: var(--color-primary-highlight); color: var(--color-primary);
+      font-size: var(--text-sm); margin-bottom: var(--space-5);
+      border: 1px solid rgba(79,152,163,0.18);
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+      margin-bottom: var(--space-5);
+    }
+    .hero p {
+      color: var(--color-text-muted);
+      max-width: 60ch;
+      margin-bottom: var(--space-6);
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-8); }
+    .button {
+      min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+      padding: 0.9rem 1.25rem; border-radius: 999px; border: 1px solid transparent;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { background: var(--color-primary); color: #081214; font-weight: 700; }
+    .button.primary:hover { background: var(--color-primary-hover); }
+    .button.secondary { background: transparent; border-color: rgba(242,240,236,0.14); color: var(--color-text); }
+    .button.secondary:hover { border-color: rgba(79,152,163,0.4); color: var(--color-primary); }
+
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--space-4);
+      max-width: 40rem;
+    }
+    .stat {
+      padding: var(--space-4); border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat strong { display: block; font-size: var(--text-lg); font-family: var(--font-display); }
+    .stat span { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+    .hero-card, .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+    }
+    .hero-card { padding: var(--space-8); }
+    .profile-art {
+      aspect-ratio: 4 / 4.5; border-radius: calc(var(--radius-xl) - var(--space-2));
+      background:
+        radial-gradient(circle at 50% 20%, rgba(79,152,163,0.36), transparent 22%),
+        linear-gradient(160deg, rgba(79,152,163,0.18), rgba(255,255,255,0.02)),
+        #151412;
+      display: grid; place-items: center; overflow: hidden; position: relative;
+      margin-bottom: var(--space-6);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .profile-art::after {
+      content: '';
+      position: absolute; inset: auto -10% -12% auto; width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(79,152,163,0.14); filter: blur(10px);
+    }
+    .profile-photo-large {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: calc(var(--radius-xl) - var(--space-2));
+    }
+    .quick-card { display: grid; gap: var(--space-3); }
+    .quick-card h2 { font-size: var(--text-lg); font-family: var(--font-display); }
+    .quick-card p { color: var(--color-text-muted); }
+
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); }
+    .section-head h2 { font-family: var(--font-display); font-size: var(--text-xl); letter-spacing: -0.03em; }
+    .section-head p { color: var(--color-text-muted); max-width: 58ch; }
+
+    .about-grid,
+    .contact-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-6); }
+
+    .panel { padding: var(--space-6); }
+    .panel p { color: var(--color-text-muted); }
+
+    .skill-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--space-4);
+    }
+    .skill-card {
+      padding: var(--space-5); border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+      min-height: 150px; display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-3);
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
+    }
+    .skill-card:hover { transform: translateY(-4px); border-color: rgba(79,152,163,0.32); background: rgba(79,152,163,0.07); }
+    .skill-card small { color: var(--color-primary); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.12em; }
+    .skill-card h3 { font-size: var(--text-lg); }
+    .skill-card p { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+    .highlights { display: grid; gap: var(--space-4); }
+    .highlight-item {
+      padding: var(--space-5); border-left: 1px solid rgba(79,152,163,0.2);
+      background: rgba(255,255,255,0.025); border-radius: var(--radius-lg);
+    }
+    .highlight-item h3 { margin-bottom: var(--space-2); font-size: var(--text-lg); }
+    .highlight-item p { color: var(--color-text-muted); }
+
+    .contact-list { display: grid; gap: var(--space-4); }
+    .contact-link {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+      min-height: 56px; padding: var(--space-4) var(--space-5);
+      border-radius: var(--radius-lg); background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+    .contact-link:hover { border-color: rgba(79,152,163,0.32); }
+    .contact-link span { color: var(--color-text-muted); font-size: var(--text-sm); word-break: break-word; }
+
+    footer {
+      padding: var(--space-8) 0 var(--space-10);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--color-text-muted);
+    }
+    footer .container { display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+
+    /* Project card specific styles */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+    .project-showcase {
+      background: linear-gradient(145deg, rgba(79,152,163,0.12), rgba(0,0,0,0.2));
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(79,152,163,0.25);
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .project-showcase:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 35px -15px rgba(0,0,0,0.5);
+      border-color: rgba(79,152,163,0.5);
+    }
+    .project-embed {
+      width: 100%;
+      background: #f8fafc;
+      border-bottom: 2px solid rgba(79,152,163,0.3);
+    }
+    .project-embed iframe {
+      width: 100%;
+      height: 620px;
+      display: block;
+      border: none;
+    }
+    .project-info {
+      padding: var(--space-6);
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(2px);
+    }
+    .project-info h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+    .project-badge {
+      display: inline-block;
+      background: rgba(79,152,163,0.2);
+      border-radius: 999px;
+      padding: 0.2rem 0.9rem;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: var(--space-3);
+      border: 1px solid rgba(79,152,163,0.3);
+      color: var(--color-primary-hover);
+    }
+    
+    @media (max-width: 980px) {
+      .hero, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .skill-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .hero { min-height: auto; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .project-embed iframe { height: 560px; }
+    }
+
+    @media (max-width: 640px) {
+      main { padding-top: var(--space-8); }
+      section { padding: var(--space-8) 0; }
+      .hero-card, .panel { padding: var(--space-5); }
+      .hero-stats { grid-template-columns: 1fr; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .project-embed iframe { height: 520px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Ezhilan home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 5h12" />
+            <path d="M6 12h9" />
+            <path d="M6 19h12" />
+            <path d="M15 12l3-3" />
+            <path d="M15 12l3 3" />
+          </svg>
+        </span>
+        <span>MAIN</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+    <section class="hero" id="home">
+      <div>
+        <span class="eyebrow">College student · C & Web Developer</span>
+        <h1>EZHILAN V</h1>
+        <p>
+          I am a college student passionate about programming, from systems-level C to interactive web experiences. I build real-world projects that solve problems — like my Idioms daily learning tool and a complete Hospital Patient Management System in C.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="mailto:ezhilan22112007@gmail.com">Email me</a>
+          <a class="button secondary" href="#projects">Explore projects</a>
+        </div>
+        <div class="hero-stats" aria-label="Profile highlights">
+          <div class="stat"><strong>5+</strong><span>Core skills</span></div>
+          <div class="stat"><strong>6</strong><span>Certifications</span></div>
+          <div class="stat"><strong>2</strong><span>Live projects</span></div>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Profile overview">
+        <div class="profile-art" role="img" aria-label="Ezhilan's profile photograph">
+          <img class="profile-photo-large" src="https://i.postimg.cc/13qrvVPK/ezhilan-photo.jpg" alt="Ezhilan's profile photo">
+        </div>
+        <div class="quick-card">
+          <h2>Focused on growth</h2>
+          <p>Building foundations in C, data structures, web technologies, and interactive tools that help people learn and manage data.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about">
+      <div class="section-head"><h2>About me</h2><p>Student, developer, and creator of practical applications.</p></div>
+      <div class="about-grid">
+        <article class="panel"><p>I love the logic of C and the creativity of web development. My projects reflect my journey: from mastering fundamentals like patient record management to building full interactive learning tools. The LID project helps people learn idioms daily, and the Hospital Management System demonstrates structs, arrays, and CRUD operations in C.</p></article>
+        <aside class="panel highlights">
+          <div class="highlight-item"><h3>Current focus</h3><p>Deepening C skills and building full-stack tools.</p></div>
+          <div class="highlight-item"><h3>Learning style</h3><p>Daily coding & project-based learning.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head"><h2>Skills</h2><p>A blend of systems programming and modern web.</p></div>
+      <div class="skill-grid">
+        <article class="skill-card"><small>Systems</small><h3>C Programming</h3><p>Structs, pointers, file handling, algorithms.</p></article>
+        <article class="skill-card"><small>Programming</small><h3>Python</h3><p>Logic, data analysis, scripting.</p></article>
+        <article class="skill-card"><small>Programming</small><h3>C++</h3><p>OOP fundamentals.</p></article>
+        <article class="skill-card"><small>Programming</small><h3>Java</h3><p>Object-oriented basics.</p></article>
+        <article class="skill-card"><small>Web</small><h3>HTML/CSS/JS</h3><p>Interactive frontend apps.</p></article>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <div class="section-head"><h2>Certifications</h2><p>Verified credentials from leading platforms.</p></div>
+      <div class="skill-grid">
+        <article class="skill-card"><small>Coursera</small><h3>Intro to iOS Development</h3><p><a href="#" style="color:var(--color-primary);">View credential</a></p></article>
+        <article class="skill-card"><small>Coursera</small><h3>Programming Fundamentals in Swift</h3><p><a href="#" style="color:var(--color-primary);">View credential</a></p></article>
+        <article class="skill-card"><small>Coursera</small><h3>Google Data Analytics</h3><p><a href="#" style="color:var(--color-primary);">View credential</a></p></article>
+        <article class="skill-card"><small>Coursera</small><h3>Meta iOS UI Development</h3><p><a href="#" style="color:var(--color-primary);">View credential</a></p></article>
+        <article class="skill-card"><small>Coursera</small><h3>Data Analysis Using Python</h3><p><a href="#" style="color:var(--color-primary);">View credential</a></p></article>
+        <article class="skill-card"><small>NPTEL</small><h3>Computer Networks & IP</h3><p>Score: 53%</p></article>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION: TWO INTERACTIVE APPS -->
+    <section id="projects">
+      <div class="section-head">
+        <h2>⚡Projects⚡</h2>
+        <p>Interactive web apps: Learn Idioms Daily (90-day journey) + Hospital Patient Management System (C simulation)</p>
+      </div>
+      <div class="projects-grid">
+        
+        <!-- PROJECT 1: LID (Learn Idioms Daily) -->
+        <div class="project-showcase">
+          <div class="project-embed">
+            <iframe srcdoc='
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LID - Learn Idioms Daily</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}body{background:linear-gradient(135deg,#f0f4f8,#d9e2ec);font-family:Segoe UI,Roboto,sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:1.5rem}.daily-card{max-width:750px;width:100%;background:white;border-radius:48px;box-shadow:0 25px 45px -12px rgba(0,0,0,0.25);overflow:hidden}.header-bg{background:linear-gradient(120deg,#1f4e6e,#2c6e9e);padding:1.8rem 1.5rem;text-align:center;color:white}.logo h1{font-size:1.5rem}.day-progress{background:rgba(255,255,255,0.2);border-radius:60px;display:inline-block;padding:0.3rem 1rem;margin-top:0.8rem}.content{padding:1.8rem}.idiom-phrase{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#1f4e6e,#3a7ca5);background-clip:text;-webkit-background-clip:text;color:transparent}.meaning-box,.example-box{border-radius:28px;padding:1.2rem;margin:1rem 0}.meaning-box{background:#f8fafd;border-left:5px solid #2c6e9e}.example-box{background:#fff9ef;border-left:5px solid #e9b35f}.progress-section{background:#f0f4f8;border-radius:60px;padding:0.5rem;display:flex;align-items:center;gap:0.8rem}.progress-bar-container{flex:2;background:#dce5ec;border-radius:40px;height:8px;overflow:hidden}.progress-fill{background:linear-gradient(90deg,#2c6e9e,#5fa3c9);width:0%;height:100%}.btn{background:white;border:1px solid #cbdde9;padding:0.4rem 1rem;border-radius:60px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="daily-card"><div class="header-bg"><div class="logo"><h1>📖 LID — IDIOMS DAILY</h1></div><div class="tagline">one phrase · 90 days</div><div class="day-progress" id="dayC">Day --/90</div></div><div class="content" id="dynC">Loading...</div></div>
+<script>
+  const idioms = Array.from({length:90},(_,i)=>({day:i+1,phrase:i===0?"Break the ice":i===1?"Hit the nail on the head":i===2?"Piece of cake":`Idiom ${i+1}`,meaning:"Daily vocabulary booster",example:"Use it in conversation!"}));
+  idioms[0]={day:1,phrase:"Break the ice",meaning:"To relieve tension in social settings",example:"He told a joke to break the ice."};
+  idioms[1]={day:2,phrase:"Hit the nail on the head",meaning:"To be exactly correct",example:"Your analysis hit the nail on the head."};
+  idioms[2]={day:3,phrase:"Piece of cake",meaning:"Extremely easy",example:"The quiz was a piece of cake."};
+  function getDay(){let s=localStorage.getItem("lid_start");if(!s){let d=new Date();d.setHours(0,0,0,0);localStorage.setItem("lid_start",d.getTime());s=d.getTime()}let start=new Date(parseInt(s));let today=new Date();today.setHours(0,0,0,0);let diff=Math.floor((today-start)/(86400000))+1;return Math.min(90,Math.max(1,diff))}
+  function render(){let d=getDay();let idiom=idioms[d-1];let percent=(d/90)*100;document.getElementById("dayC").innerText="📅 Day "+d+"/90";document.getElementById("dynC").innerHTML=`<div style="text-align:center"><div class="idiom-phrase">“${idiom.phrase}”</div></div><div class="meaning-box"><div style="font-weight:700">📖 MEANING</div><div>${idiom.meaning}</div></div><div class="example-box"><div style="font-weight:700">💬 EXAMPLE</div><div>“${idiom.example}”</div></div><div class="progress-section"><div class="progress-bar-container"><div class="progress-fill" style="width:${percent}%"></div></div><div>${d}/90 days</div></div><div style="text-align:center;margin-top:1rem"><button class="btn" id="resetBtn">🔄 Reset</button></div>`;document.getElementById("resetBtn")?.addEventListener("click",()=>{if(confirm("Reset to day 1?")){let nd=new Date();nd.setHours(0,0,0,0);localStorage.setItem("lid_start",nd.getTime());render()}})}
+  render();
+</script>
+</body>
+</html>
+            ' title="Learn Idioms Daily" style="width:100%; height:560px; border-radius:24px 24px 0 0;" loading="lazy"></iframe>
+          </div>
+          <div class="project-info"><span class="project-badge">📚 PROJECT #1</span><h3>Learn Idioms Daily (LID)</h3><p>90-day vocabulary builder that unlocks one idiom per calendar day. Uses localStorage to track progress. Perfect for ESL learners and daily English improvement.</p></div>
+        </div>
+
+        <!-- PROJECT 2: HOSPITAL PATIENT MANAGEMENT SYSTEM (FULL C SIMULATION) -->
+        <div class="project-showcase">
+          <div class="project-embed">
+            <iframe srcdoc='
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hospital Management System | C Project Simulation</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}body{background:#0b1120;font-family:"Fira Code","Courier New",monospace;padding:1.5rem;display:flex;justify-content:center;align-items:center;min-height:100vh}.hospital-app{max-width:800px;width:100%;background:#0f1724;border-radius:2rem;box-shadow:0 20px 40px -12px black;border:1px solid #2d4a6e;overflow:hidden}.header{background:#0a101c;padding:1rem 1.5rem;border-bottom:1px solid #2c5282;text-align:center}h2{color:#5dade2;font-weight:600}.sub{color:#7f8fa4;font-size:0.7rem;margin-top:0.2rem}.console-area{background:#0a0e17;padding:1.5rem}.output-window{background:#06080f;border-radius:1rem;padding:1rem;font-family:monospace;color:#b0d4ff;border:1px solid #2c5282;min-height:280px;white-space:pre-wrap;font-size:0.8rem;margin-bottom:1rem;overflow-y:auto;max-height:300px}.input-group{display:flex;gap:0.5rem;margin:1rem 0;flex-wrap:wrap}.input-group input{flex:2;background:#0f1724;border:1px solid #2c5282;padding:0.6rem;border-radius:1rem;color:white;font-family:monospace}.input-group select,.input-group button{background:#1e3a5f;border:none;padding:0.6rem 1rem;border-radius:1.5rem;color:white;cursor:pointer;font-weight:bold}.btn-danger{background:#6b2e2e}.btn-primary{background:#2c6e9e}.reset-btn{background:#2d3748}.footer-text{font-size:0.7rem;text-align:center;color:#5a6e8a;margin-top:1rem}
+</style>
+</head>
+<body>
+<div class="hospital-app"><div class="header"><h2>🏥 Hospital Patient Management System</h2><div class="sub">C language simulation (structs, arrays, CRUD)</div></div><div class="console-area"><div class="output-window" id="outputArea">=== HOSPITAL SYSTEM READY ===\nUse the controls below to Add, Visit, or Discharge patients.\nOriginal C code logic preserved.\n--------------------------------------------------</div><div class="input-group"><select id="actionSelect"><option value="add">➕ Add Patient</option><option value="visit">👁️ Visit Patient</option><option value="discharge">🚪 Discharge Patient</option></select><input type="text" id="inputData" placeholder='Name,Age,Disease,Condition (format: Ravi,45,Fever,stable) for add. For visit/discharge: ID'><button id="executeBtn" class="btn-primary">▶ Execute</button><button id="resetBtn" class="reset-btn">🔄 Reset System</button></div><div class="footer-text">💡 Tip: Add patient → "Ravi,45,Fever,stable" | Visit/Discharge → "1" (patient ID). Full C struct logic active.</div></div></div>
+<script>
+  let patients = [];
+  let nextId = 1;
+  function addToOutput(msg){let outDiv=document.getElementById("outputArea");outDiv.innerText+=msg+"\n";outDiv.scrollTop=outDiv.scrollHeight;}
+  function renderSystemStatus(){}
+  function addPatient(name,age,disease,condition){if(patients.length>=100){addToOutput("❌ Hospital is full!");return;}let id=nextId++;patients.push({id:id,name:name,age:parseInt(age),disease:disease,condition:condition,active:1});addToOutput(`✅ Patient added successfully.\n   Patient ID = ${id}\n   Name: ${name}, Age: ${age}, Disease: ${disease}, Condition: ${condition}`);}
+  function dischargePatient(id){for(let i=0;i<patients.length;i++){if(patients[i].id===id && patients[i].active===1){patients[i].active=0;addToOutput(`🚑 Patient Name: ${patients[i].name}\n   ID: ${id} discharged.`);return;}}addToOutput(`❌ Patient not found or already discharged.`);}
+  function visitPatient(id){for(let i=0;i<patients.length;i++){if(patients[i].id===id && patients[i].active===1){let p=patients[i];addToOutput(`👨‍⚕️ VISITING PATIENT:\n   ID: ${p.id}\n   Name: ${p.name}\n   Age: ${p.age}\n   Disease: ${p.disease}\n   Condition: ${p.condition}`);return;}}addToOutput(`❌ Patient not found or discharged.`);}
+  function resetSystem(){patients=[];nextId=1;addToOutput("\n🔄 SYSTEM RESET. All patient records cleared.");}
+  document.getElementById("executeBtn").addEventListener("click",()=>{let action=document.getElementById("actionSelect").value;let raw=document.getElementById("inputData").value.trim();if(!raw){addToOutput("⚠️ Please provide input.");return;}
+    if(action==="add"){let parts=raw.split(",");if(parts.length<4){addToOutput("❌ Format: Name,Age,Disease,Condition (e.g., Ravi,45,Fever,stable)");return;}addPatient(parts[0].trim(),parts[1].trim(),parts[2].trim(),parts[3].trim());}
+    else if(action==="visit"){let id=parseInt(raw);if(isNaN(id)){addToOutput("❌ Enter numeric patient ID.");return;}visitPatient(id);}
+    else if(action==="discharge"){let id=parseInt(raw);if(isNaN(id)){addToOutput("❌ Enter numeric patient ID.");return;}dischargePatient(id);}
+    document.getElementById("inputData").value="";});
+  document.getElementById("resetBtn").addEventListener("click",()=>{resetSystem();});
+  addToOutput("✨ C-based Hospital Management System ready.\n📌 Commands: Add (Name,Age,Disease,Condition) | Visit/Discharge (ID)");
+</script>
+</body>
+</html>
+            ' title="Hospital Management System in C" style="width:100%; height:620px; border-radius:24px 24px 0 0;" loading="lazy"></iframe>
+          </div>
+          <div class="project-info"><span class="project-badge">🏥 PROJECT #2 · C IMPLEMENTATION</span><h3>Hospital Patient Management System</h3><p>Complete C program simulation: Add, Visit, and Discharge patients using structs and arrays. Realistic implementation of the classic C project with active/inactive flags, ID auto-generation, and full error handling. Interactive web-based terminal.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-head"><h2>Contact</h2><p>Reach out for collaborations or just to say hi.</p></div>
+      <div class="contact-grid">
+        <div class="contact-list">
+          <a class="contact-link" href="mailto:ezhilan22112007@gmail.com"><div><strong>Email</strong><span>ezhilan22112007@gmail.com</span></div><span>Open</span></a>
+          <a class="contact-link" href="https://www.linkedin.com/in/ezhilan-v-2929aa3b7" target="_blank"><div><strong>LinkedIn</strong><span>linkedin.com/in/ezhilan-v</span></div><span>Visit</span></a>
+          <a class="contact-link" href="tel:+919176367277"><div><strong>Phone</strong><span>+91 91763 67277</span></div><span>Call</span></a>
+        </div>
+        <aside class="panel"><h3 style="font-family:var(--font-display);">Let’s connect</h3><p>Student, programmer, creator of LID & Hospital Management System in C. Open to interesting projects and learning opportunities.</p></aside>
+      </div>
+    </section>
+  </main>
+  <footer><div class="container"><p>© 2026 Ezhilan. Built with dark theme & interactive projects.</p><p>C programmer · Web developer · Lifelong learner</p></div></footer>
+</body>
+</html>
